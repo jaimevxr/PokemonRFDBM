@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -33,11 +35,15 @@ public class Entrenador implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "nombre_entrenador")
     private String nombreEntrenador;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_entrenador")
     private Integer idEntrenador;
+
     @Column(name = "clase")
     private String clase;
+
     @Column(name = "dinero")
     private Integer dinero;
 
@@ -89,7 +95,7 @@ public class Entrenador implements Serializable {
     }
 
     @OneToMany
-    @JoinColumn(name = "id_entrenador", referencedColumnName = "id_entrenador",insertable=false,updatable=false)
+    @JoinColumn(name = "id_entrenador", referencedColumnName = "id_entrenador", insertable = false, updatable = false)
     protected List<Pokemon> pokemon;
 
     @Override

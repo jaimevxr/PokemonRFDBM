@@ -7,6 +7,8 @@ package com.daw.pokemonrojofuego;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,16 +34,22 @@ public class Pokemon implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pokemon")
     private Integer idPokemon;
+
     @Column(name = "apodo")
     private String apodo;
+
     @Column(name = "especie")
     private String especie;
+
     @Column(name = "nivel")
     private Integer nivel;
+
     @Column(name = "sprite")
     private String sprite;
+
     @Column(name = "id_entrenador")
     private Integer idEntrenador;
 
