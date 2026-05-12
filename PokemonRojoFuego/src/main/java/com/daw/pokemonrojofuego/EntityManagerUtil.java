@@ -16,7 +16,7 @@ public class EntityManagerUtil {
 
 
 public static EntityManager getEntityManager(){
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("daw_PU");
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("PokemonRF_PU");
     EntityManager manager = factory.createEntityManager();
     return manager;
 }

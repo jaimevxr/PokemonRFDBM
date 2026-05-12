@@ -28,8 +28,10 @@ import javax.persistence.Table;
     @NamedQuery(name = "Pokemon.findByApodo", query = "SELECT p FROM Pokemon p WHERE p.apodo = :apodo"),
     @NamedQuery(name = "Pokemon.findByEspecie", query = "SELECT p FROM Pokemon p WHERE p.especie = :especie"),
     @NamedQuery(name = "Pokemon.findByNivel", query = "SELECT p FROM Pokemon p WHERE p.nivel = :nivel"),
-    @NamedQuery(name = "Pokemon.findBySprite", query = "SELECT p FROM Pokemon p WHERE p.sprite = :sprite"),
-    @NamedQuery(name = "Pokemon.findByIdEntrenador", query = "SELECT p FROM Pokemon p WHERE p.idEntrenador = :idEntrenador")})
+    @NamedQuery(name = "Pokemon.findBySprite", query = "SELECT p FROM Pokemon p WHERE p.sprite = :sprite"),})
+// query eliminada y comentada ya que esta sustituida
+//@NamedQuery(name = "Pokemon.findByIdEntrenador", query = "SELECT p FROM Pokemon p WHERE p.idEntrenador = :idEntrenador")
+
 public class Pokemon implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,9 +52,9 @@ public class Pokemon implements Serializable {
     @Column(name = "sprite")
     private String sprite;
 
-    @Column(name = "id_entrenador")
-    private Integer idEntrenador;
-
+    // comentado para no eliminarlo, lo sustituye el joinColumn
+    //  @Column(name = "id_entrenador")
+    //private Integer idEntrenador;
     public Pokemon() {
     }
 
@@ -98,14 +100,6 @@ public class Pokemon implements Serializable {
 
     public void setSprite(String sprite) {
         this.sprite = sprite;
-    }
-
-    public Integer getIdEntrenador() {
-        return idEntrenador;
-    }
-
-    public void setIdEntrenador(Integer idEntrenador) {
-        this.idEntrenador = idEntrenador;
     }
 
     public Entrenador getEntrenador() {
