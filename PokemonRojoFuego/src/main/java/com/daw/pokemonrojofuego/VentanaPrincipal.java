@@ -26,17 +26,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        panelEntrenador2 = new com.daw.pokemonrojofuego.PanelEntrenador();
+        panelPokemon1 = new com.daw.pokemonrojofuego.PanelPokemon();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addTab("Entrenador", panelEntrenador2);
+
+        javax.swing.GroupLayout panelPokemon1Layout = new javax.swing.GroupLayout(panelPokemon1);
+        panelPokemon1.setLayout(panelPokemon1Layout);
+        panelPokemon1Layout.setHorizontalGroup(
+            panelPokemon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 744, Short.MAX_VALUE)
+        );
+        panelPokemon1Layout.setVerticalGroup(
+            panelPokemon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 570, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Pokemon", panelPokemon1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
 
         pack();
@@ -78,5 +97,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private com.daw.pokemonrojofuego.PanelEntrenador panelEntrenador2;
+    private com.daw.pokemonrojofuego.PanelPokemon panelPokemon1;
     // End of variables declaration//GEN-END:variables
 }
