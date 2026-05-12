@@ -5,11 +5,15 @@
 package com.daw.pokemonrojofuego;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -76,6 +80,18 @@ public class Entrenador implements Serializable {
         this.dinero = dinero;
     }
 
+    public List<Pokemon> getPokemon() {
+        return pokemon;
+    }
+
+    public void setPokemon(List<Pokemon> pokemon) {
+        this.pokemon = pokemon;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "id_entrenador", referencedColumnName = "id_entrenador",insertable=false,updatable=false)
+    protected List<Pokemon> pokemon;
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -100,5 +116,5 @@ public class Entrenador implements Serializable {
     public String toString() {
         return "com.daw.pokemonrojofuego.Entrenador[ idEntrenador=" + idEntrenador + " ]";
     }
-    
+
 }

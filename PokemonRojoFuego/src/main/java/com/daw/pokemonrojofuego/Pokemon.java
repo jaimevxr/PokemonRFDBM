@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -98,6 +100,18 @@ public class Pokemon implements Serializable {
         this.idEntrenador = idEntrenador;
     }
 
+    public Entrenador getEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(Entrenador entrenador) {
+        this.entrenador = entrenador;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_entrenador", referencedColumnName = "id_entrenador")
+    private Entrenador entrenador;
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -122,5 +136,5 @@ public class Pokemon implements Serializable {
     public String toString() {
         return "com.daw.pokemonrojofuego.Pokemon[ idPokemon=" + idPokemon + " ]";
     }
-    
+
 }
