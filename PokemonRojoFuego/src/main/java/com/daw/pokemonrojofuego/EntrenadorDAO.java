@@ -25,36 +25,29 @@ public class EntrenadorDAO {
         return entrenador;
     }
 
-    public Entrenador buscarPorNombre(String nombreEntrenador) {
-        EntityManager em = EntityManagerUtil.getEntityManager();
+    public Entrenador buscarPorNombre(String nombreAbuscar) {
+        javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
+        try {
+            // ¡Usamos el nombre exacto de la variable Java!
+            javax.persistence.TypedQuery<Entrenador> consulta = em.createQuery(
+                    "SELECT e FROM Entrenador e WHERE LOWER(e.nombreEntrenador) = LOWER(:nombre)", Entrenador.class);
+            consulta.setParameter("nombre", nombreAbuscar);
 
-        // consulta para buscar el nombre
-        javax.persistence.TypedQuery<Entrenador> consulta = em.createQuery("SELECT e FROM Entrenador e WHERE e.nombre_entrenador = :nombre", Entrenador.class);
+            return consulta.getSingleResult();
 
-        // pasamos el parámetro a esa consulta
-        consulta.setParameter("nombre", nombreEntrenador);
-
-        // ejecutamos la consulta y guardamos los resultados en la lista 
-        List<Entrenador> resultados = consulta.getResultList();
-
-        em.close();
-
-        // comprobamos si encontramos a alguien
-        if (!resultados.isEmpty()) {
-            return resultados.get(0);
-        } else {
+        } catch (javax.persistence.NoResultException e) {
             return null;
         }
     }
 
-    void guardar(Entrenador entrenador) {
+    public void guardar(Entrenador entrenador) {
         EntityManager em = EntityManagerUtil.getEntityManager();
         em.getTransaction().begin();
         em.persist(entrenador);
         em.getTransaction().commit();
         em.close();
     }
-    
+
     public void actualizar(Entrenador entrenador) {
         EntityManager em = EntityManagerUtil.getEntityManager();
         em.getTransaction().begin();
@@ -62,7 +55,7 @@ public class EntrenadorDAO {
         em.getTransaction().commit();
         em.close();
     }
-    
+
     public void borrar(int id) {
         EntityManager em = EntityManagerUtil.getEntityManager();
         em.getTransaction().begin();
@@ -73,7 +66,7 @@ public class EntrenadorDAO {
         em.getTransaction().commit();
         em.close();
     }
-    
+
     public List<Entrenador> obtenerTodos() {
         EntityManager em = EntityManagerUtil.getEntityManager();
         javax.persistence.TypedQuery<Entrenador> consulta = em.createQuery("SELECT e FROM Entrenador e", Entrenador.class);

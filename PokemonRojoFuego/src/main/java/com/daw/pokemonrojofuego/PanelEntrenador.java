@@ -4,7 +4,6 @@ package com.daw.pokemonrojofuego;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-
 /**
  *
  * @author Alumnado
@@ -28,9 +27,9 @@ public class PanelEntrenador extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaPokemon = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscador = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -45,7 +44,7 @@ public class PanelEntrenador extends javax.swing.JPanel {
         txtClase = new javax.swing.JTextField();
         txtDinero = new javax.swing.JTextField();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPokemon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,14 +63,16 @@ public class PanelEntrenador extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaPokemon);
 
         jLabel3.setText("Buscar entrenador :");
 
-        jTextField1.setText("ID/NOMBRE");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtBuscador.setText("ID/NOMBRE");
+        txtBuscador.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtBuscador.setMinimumSize(new java.awt.Dimension(80, 22));
+        txtBuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtBuscadorActionPerformed(evt);
             }
         });
 
@@ -137,7 +138,7 @@ public class PanelEntrenador extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +172,7 @@ public class PanelEntrenador extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,7 +180,6 @@ public class PanelEntrenador extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jButton3))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel1)
@@ -197,15 +197,15 @@ public class PanelEntrenador extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtBuscadorActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -217,6 +217,73 @@ public class PanelEntrenador extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        // 1. Recogemos lo que el usuario ha escrito en el buscador
+        String textoBuscador = txtBuscador.getText().trim();
+
+        // Si el buscador está vacío, avisamos y cortamos
+        if (textoBuscador.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, escribe un ID o un Nombre para buscar.");
+            return;
+        }
+
+        // 2. Llamamos a nuestro "cerebro" (DAO)
+        EntrenadorDAO dao = new EntrenadorDAO();
+        Entrenador entrenadorEncontrado = null;
+
+        try {
+            // Intentamos convertir el texto a número. Si funciona, buscamos por ID.
+            int idBuscado = Integer.parseInt(textoBuscador);
+            entrenadorEncontrado = dao.buscarPorId(idBuscado);
+        } catch (NumberFormatException ex) {
+            // Si salta error porque ha escrito letras, buscamos por Nombre.
+            entrenadorEncontrado = dao.buscarPorNombre(textoBuscador);
+        }
+
+        // 3. Mostramos el resultado en las cajitas
+        if (entrenadorEncontrado != null) {
+            // ¡Lo encontramos! Rellenamos el formulario
+            txtId.setText(String.valueOf(entrenadorEncontrado.getIdEntrenador()));
+            txtNombre.setText(entrenadorEncontrado.getNombreEntrenador());
+
+            // OJO: Si no tienes el campo "clase" en tu base de datos, borra o comenta la siguiente línea
+            txtClase.setText(entrenadorEncontrado.getClase()); 
+            txtDinero.setText(String.valueOf(entrenadorEncontrado.getDinero()));
+
+            // Más adelante meteremos aquí el código para rellenar la tabla de sus Pokémon
+        } else {
+            // No existe en la base de datos
+            javax.swing.JOptionPane.showMessageDialog(this, "No se ha encontrado ningún entrenador con esos datos.");
+
+            // Vaciamos las cajas por si había datos de una búsqueda anterior
+            txtId.setText("");
+            txtNombre.setText("");
+            txtClase.setText("");
+            txtDinero.setText("");
+        }
+        
+        // --- CÓDIGO PARA RELLENAR LA TABLA ---
+            
+            // 1. Preparamos la tabla y la vaciamos por si tenía datos viejos
+            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaPokemon.getModel();
+            modelo.setRowCount(0); 
+            
+            // 2. Llamamos al DAO de Pokémon para que nos traiga el equipo de este entrenador
+            PokemonDAO pokeDAO = new PokemonDAO();
+            java.util.List<Pokemon> equipo = pokeDAO.obtenerPorEntrenador(entrenadorEncontrado);
+            
+            // 3. Metemos a cada Pokémon en una fila de la tabla
+            if (equipo != null) {
+                for (Pokemon p : equipo) {
+                    Object[] fila = new Object[4];
+                    // Ajusta estos "get" a los nombres reales que tengas en tu clase Pokemon
+                    fila[0] = p.getApodo(); 
+                    fila[1] = p.getIdPokemon();
+                    fila[2] = p.getNivel();
+                    fila[3] = p.getSprite(); 
+                    
+                    modelo.addRow(fila);
+                }
+            }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
@@ -236,8 +303,8 @@ public class PanelEntrenador extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaPokemon;
+    private javax.swing.JTextField txtBuscador;
     private javax.swing.JTextField txtClase;
     private javax.swing.JTextField txtDinero;
     private javax.swing.JTextField txtId;
