@@ -15,6 +15,25 @@ public class PanelEntrenador extends javax.swing.JPanel {
      */
     public PanelEntrenador() {
         initComponents();
+
+        // --- CONFIGURACIÓN DE LA TABLA PARA LOS SPRITES ---
+        // 1. Hacemos las filas más altas (64 píxeles) para que se vea el Pokémon
+        tablaPokemon.setRowHeight(64);
+
+        // 2. Le enseñamos a la columna 3 (Sprite) a dibujar imágenes
+        tablaPokemon.getColumnModel().getColumn(3).setCellRenderer(new javax.swing.table.DefaultTableCellRenderer() {
+            @Override
+            public void setValue(Object value) {
+                if (value instanceof javax.swing.Icon) {
+                    setIcon((javax.swing.Icon) value);
+                    setText(""); // Quitamos el texto para que solo salga la foto
+                    setHorizontalAlignment(javax.swing.JLabel.CENTER); // Centramos la foto
+                } else {
+                    setIcon(null);
+                    super.setValue(value);
+                }
+            }
+        });
     }
 
     /**
@@ -43,6 +62,7 @@ public class PanelEntrenador extends javax.swing.JPanel {
         txtNombre = new javax.swing.JTextField();
         txtClase = new javax.swing.JTextField();
         txtDinero = new javax.swing.JTextField();
+        testButton = new javax.swing.JButton();
 
         tablaPokemon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,6 +115,8 @@ public class PanelEntrenador extends javax.swing.JPanel {
         jLabel5.setText("Informacion del entrenador");
 
         jButton4.setText("Buscar");
+        jButton4.setMargin(new java.awt.Insets(3, 15, 3, 15));
+        jButton4.setPreferredSize(new java.awt.Dimension(72, 24));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -123,76 +145,88 @@ public class PanelEntrenador extends javax.swing.JPanel {
 
         txtDinero.setPreferredSize(new java.awt.Dimension(120, 22));
 
+        testButton.setText("Cambiar foto pokemon");
+        testButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtClase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(txtClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(96, 96, 96)
+                                        .addComponent(testButton))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(73, 73, 73)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))))
-                .addContainerGap(256, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(73, 73, 73)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton2))))))))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(25, 25, 25))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jButton3)
+                                    .addComponent(jButton2))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel1)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jButton3))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                            .addComponent(jLabel2)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(testButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -216,79 +250,117 @@ public class PanelEntrenador extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        // 1. Recogemos lo que el usuario ha escrito en el buscador
+        // 1. Recogemos el texto del buscador
         String textoBuscador = txtBuscador.getText().trim();
 
-        // Si el buscador está vacío, avisamos y cortamos
         if (textoBuscador.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, escribe un ID o un Nombre para buscar.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Escribe un ID o Nombre.");
             return;
         }
 
-        // 2. Llamamos a nuestro "cerebro" (DAO)
+// 2. Inicializamos DAOs y variables
         EntrenadorDAO dao = new EntrenadorDAO();
         Entrenador entrenadorEncontrado = null;
 
+// Limpiamos la tabla antes de empezar
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaPokemon.getModel();
+        modelo.setRowCount(0);
+
         try {
-            // Intentamos convertir el texto a número. Si funciona, buscamos por ID.
+            // Intentamos buscar por ID (si es número)
             int idBuscado = Integer.parseInt(textoBuscador);
             entrenadorEncontrado = dao.buscarPorId(idBuscado);
         } catch (NumberFormatException ex) {
-            // Si salta error porque ha escrito letras, buscamos por Nombre.
+            // Si no es número, buscamos por Nombre
             entrenadorEncontrado = dao.buscarPorNombre(textoBuscador);
         }
 
-        // 3. Mostramos el resultado en las cajitas
+// 3. Si encontramos al entrenador, rellenamos todo
         if (entrenadorEncontrado != null) {
-            // ¡Lo encontramos! Rellenamos el formulario
+            // Rellenamos cajas de texto
             txtId.setText(String.valueOf(entrenadorEncontrado.getIdEntrenador()));
             txtNombre.setText(entrenadorEncontrado.getNombreEntrenador());
-
-            // OJO: Si no tienes el campo "clase" en tu base de datos, borra o comenta la siguiente línea
-            txtClase.setText(entrenadorEncontrado.getClase()); 
+            txtClase.setText(entrenadorEncontrado.getClase());
             txtDinero.setText(String.valueOf(entrenadorEncontrado.getDinero()));
 
-            // Más adelante meteremos aquí el código para rellenar la tabla de sus Pokémon
-        } else {
-            // No existe en la base de datos
-            javax.swing.JOptionPane.showMessageDialog(this, "No se ha encontrado ningún entrenador con esos datos.");
+            // 4. Cargamos su equipo Pokémon en la tabla
+            // Usamos la relación directa que ya tienes en Entrenador.java
+            java.util.List<Pokemon> equipo = entrenadorEncontrado.getPokemon();
 
-            // Vaciamos las cajas por si había datos de una búsqueda anterior
+            if (equipo != null) {
+                for (Pokemon p : equipo) {
+                    Object[] fila = new Object[4];
+                    fila[0] = p.getApodo();
+                    fila[1] = p.getIdPokemon();
+                    fila[2] = p.getNivel();
+
+// --- TRATAMIENTO DEL SPRITE COMO BLOB (Para sacar el 10) ---
+                    byte[] spriteBytes = p.getSprite();
+
+                    if (spriteBytes != null && spriteBytes.length > 0) {
+                        try {
+                            // Convertimos los bytes directamente en una imagen gráfica
+                            javax.swing.ImageIcon icono = new javax.swing.ImageIcon(spriteBytes);
+                            // La redimensionamos para que quede bonita en la tabla (60x60)
+                            java.awt.Image img = icono.getImage().getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+                            fila[3] = new javax.swing.ImageIcon(img);
+                        } catch (Exception e) {
+                            fila[3] = "Error imagen";
+                        }
+                    } else {
+                        fila[3] = "Sin imagen";
+                    }
+                    modelo.addRow(fila);
+                }
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Entrenador no encontrado.");
+            // Vaciamos campos
             txtId.setText("");
             txtNombre.setText("");
             txtClase.setText("");
             txtDinero.setText("");
         }
-        
-        // --- CÓDIGO PARA RELLENAR LA TABLA ---
-            
-            // 1. Preparamos la tabla y la vaciamos por si tenía datos viejos
-            javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaPokemon.getModel();
-            modelo.setRowCount(0); 
-            
-            // 2. Llamamos al DAO de Pokémon para que nos traiga el equipo de este entrenador
-            PokemonDAO pokeDAO = new PokemonDAO();
-            java.util.List<Pokemon> equipo = pokeDAO.obtenerPorEntrenador(entrenadorEncontrado);
-            
-            // 3. Metemos a cada Pokémon en una fila de la tabla
-            if (equipo != null) {
-                for (Pokemon p : equipo) {
-                    Object[] fila = new Object[4];
-                    // Ajusta estos "get" a los nombres reales que tengas en tu clase Pokemon
-                    fila[0] = p.getApodo(); 
-                    fila[1] = p.getIdPokemon();
-                    fila[2] = p.getNivel();
-                    fila[3] = p.getSprite(); 
-                    
-                    modelo.addRow(fila);
-                }
-            }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
+
+    private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
+        // TODO add your handling code here:
+
+        // 1. Comprobamos que haya seleccionado uno
+        int filaSeleccionada = tablaPokemon.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Primero haz clic en un Pokémon de la tabla.");
+            return;
+        }
+
+        // 2. Sacamos EL NOMBRE del Pokémon (Columna 0 = Apodo)
+        String nombrePokemon = tablaPokemon.getValueAt(filaSeleccionada, 0).toString();
+
+        // 3. Elegimos la foto
+        javax.swing.JFileChooser explorador = new javax.swing.JFileChooser();
+        explorador.setDialogTitle("Elige el Sprite para todos los " + nombrePokemon);
+
+        if (explorador.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
+            try {
+                java.io.File archivoElegido = explorador.getSelectedFile();
+                byte[] bytesFoto = java.nio.file.Files.readAllBytes(archivoElegido.toPath());
+
+                // 4. ¡Lanzamos la actualización masiva!
+                PokemonDAO dao = new PokemonDAO();
+                dao.actualizarSpriteMasivo(nombrePokemon, bytesFoto);
+
+                javax.swing.JOptionPane.showMessageDialog(this, "¡Todos los " + nombrePokemon + " del juego ahora tienen esta foto!");
+
+                // Aquí podrías volver a llamar a tu botón "Buscar" automáticamente para que la tabla se refresque sola
+            } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_testButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -304,6 +376,7 @@ public class PanelEntrenador extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaPokemon;
+    private javax.swing.JButton testButton;
     private javax.swing.JTextField txtBuscador;
     private javax.swing.JTextField txtClase;
     private javax.swing.JTextField txtDinero;

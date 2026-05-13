@@ -85,4 +85,32 @@ public class PokemonDAO {
         em.close();
         return lista;
     }
+
+    public void actualizarSpriteMasivo(String nombrePokemon, byte[] nuevoSprite) {
+        javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            // OJO: Si tu variable en Pokemon.java se llama 'apodo', déjalo así. 
+            // Si se llama 'especie' o 'nombre', cámbialo en "p.apodo".
+            javax.persistence.Query consulta = em.createQuery(
+                    "UPDATE Pokemon p SET p.sprite = :foto WHERE p.apodo = :nombre"
+            );
+            consulta.setParameter("foto", nuevoSprite);
+            consulta.setParameter("nombre", nombrePokemon);
+
+            int actualizados = consulta.executeUpdate(); // Ejecuta el rayo
+
+            em.getTransaction().commit();
+
+            System.out.println("Se han actualizado " + actualizados + " Pokémon de la especie: " + nombrePokemon);
+
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -49,8 +50,9 @@ public class Pokemon implements Serializable {
     @Column(name = "nivel")
     private Integer nivel;
 
+    @Lob
     @Column(name = "sprite")
-    private String sprite;
+    private byte[] sprite;
 
     // comentado para no eliminarlo, lo sustituye el joinColumn
     //  @Column(name = "id_entrenador")
@@ -94,11 +96,11 @@ public class Pokemon implements Serializable {
         this.nivel = nivel;
     }
 
-    public String getSprite() {
+    public byte[] getSprite() {
         return sprite;
     }
 
-    public void setSprite(String sprite) {
+    public void setSprite(byte[] sprite) {
         this.sprite = sprite;
     }
 

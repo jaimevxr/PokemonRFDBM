@@ -74,4 +74,5 @@ public class EntrenadorDAO {
         em.close();
         return lista;
     }
+
 }
