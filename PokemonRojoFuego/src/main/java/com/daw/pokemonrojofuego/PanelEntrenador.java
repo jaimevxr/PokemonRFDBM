@@ -19,6 +19,17 @@ public class PanelEntrenador extends javax.swing.JPanel {
         // --- CONFIGURACIÓN DE LA TABLA PARA LOS SPRITES ---
         // 1. Hacemos las filas más altas (64 píxeles) para que se vea el Pokémon
         tablaPokemon.setRowHeight(64);
+        // --- ALINEACIÓN DE COLUMNAS ---
+
+        // 1. Creamos un "alineador" configurado a la izquierda
+        javax.swing.table.DefaultTableCellRenderer alineacionIzquierda = new javax.swing.table.DefaultTableCellRenderer();
+        alineacionIzquierda.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        // 2. Se lo aplicamos a la columna 1 (ID)
+        tablaPokemon.getColumnModel().getColumn(1).setCellRenderer(alineacionIzquierda);
+
+        // 3. Se lo aplicamos a la columna 2 (Nivel)
+        tablaPokemon.getColumnModel().getColumn(2).setCellRenderer(alineacionIzquierda);
 
         // 2. Le enseñamos a la columna 3 (Sprite) a dibujar imágenes
         tablaPokemon.getColumnModel().getColumn(3).setCellRenderer(new javax.swing.table.DefaultTableCellRenderer() {
@@ -78,18 +89,35 @@ public class PanelEntrenador extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tablaPokemon);
 
         jLabel3.setText("Buscar entrenador :");
 
-        txtBuscador.setText("ID/NOMBRE");
+        txtBuscador.setColumns(11);
+        txtBuscador.setForeground(new java.awt.Color(154, 154, 154));
+        txtBuscador.setText("Buscar ID o Nombre");
         txtBuscador.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtBuscador.setMinimumSize(new java.awt.Dimension(80, 22));
+        txtBuscador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtBuscadorFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBuscadorFocusLost(evt);
+            }
+        });
         txtBuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscadorActionPerformed(evt);
@@ -193,7 +221,7 @@ public class PanelEntrenador extends javax.swing.JPanel {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton2))))))))
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,9 +280,8 @@ public class PanelEntrenador extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // 1. Recogemos el texto del buscador
         String textoBuscador = txtBuscador.getText().trim();
-
-        if (textoBuscador.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Escribe un ID o Nombre.");
+        if (textoBuscador.isEmpty() || textoBuscador.equals("Buscar ID o Nombre")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, escribe un ID o un Nombre para buscar.");
             return;
         }
 
@@ -361,6 +388,23 @@ public class PanelEntrenador extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_testButtonActionPerformed
+
+    private void txtBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBuscadorFocusGained
+        // TODO add your handling code here:
+        if (txtBuscador.getText().equals("Buscar ID o Nombre")) {
+            txtBuscador.setText("");
+            txtBuscador.setForeground(new java.awt.Color(0, 0, 0)); // Negro
+        }
+    }//GEN-LAST:event_txtBuscadorFocusGained
+
+    private void txtBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBuscadorFocusLost
+        // TODO add your handling code here:
+        // Si el usuario se va de la caja y la ha dejado vacía, volvemos a poner el placeholder gris
+        if (txtBuscador.getText().isEmpty()) {
+            txtBuscador.setForeground(new java.awt.Color(153, 153, 153)); // Gris
+            txtBuscador.setText("Buscar ID o Nombre");
+        }
+    }//GEN-LAST:event_txtBuscadorFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

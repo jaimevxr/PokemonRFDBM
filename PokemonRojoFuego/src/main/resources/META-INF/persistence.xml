@@ -5,7 +5,7 @@
     <class>com.daw.pokemonrojofuego.Entrenador</class>
     <class>com.daw.pokemonrojofuego.Pokemon</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:E:\Pokemon Rojo Fuego\Pokemon Rojo Fuego\PokemonRojoFuego\PokemonRFDB.db"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:E:\PokemonRF\PokemonRojoFuego\PokemonRFDB.db"/>
       <property name="javax.persistence.jdbc.user" value=""/>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
       <property name="javax.persistence.jdbc.password" value=""/>
