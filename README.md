@@ -1,6 +1,6 @@
 # 🔴 Pokémon Rojo Fuego - Database Manager
 
-Este proyecto es una aplicación de escritorio desarrollada en **Java** como trabajo final para el módulo de **Bases de Datos** (DAW). Se trata de un gestor avanzado que permite administrar entrenadores y sus equipos Pokémon, utilizando persistencia de datos y una interfaz gráfica moderna.
+Este proyecto es una aplicación de escritorio desarrollada en **Java** como trabajo final para el módulo de **Programacion** (DAW). Se trata de un gestor avanzado que permite administrar entrenadores y sus equipos Pokémon, utilizando persistencia de datos y una interfaz gráfica moderna.
 
 ## 🚀 Funcionalidades Principales
 
