@@ -15,6 +15,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        this.setTitle("Pokémon Rojo Fuego - Gestor de Entrenadores");
+        try {
+            // Opción A: Si la foto está en la raíz de resources
+            java.net.URL urlIcono = getClass().getResource("/icon.png");
+
+            // Opción B: Si la foto está dentro de tus paquetes (ajusta la ruta)
+            // java.net.URL urlIcono = getClass().getResource("/com/daw/pokemonrojofuego/icon.png");
+            if (urlIcono != null) {
+                java.awt.Image icon = javax.imageio.ImageIO.read(urlIcono);
+                this.setIconImage(icon);
+            } else {
+                System.out.println("Error: No se encontró el archivo icon.png en resources");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -26,37 +42,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPaneVentanaPrincipal = new javax.swing.JTabbedPane();
         panelEntrenador2 = new com.daw.pokemonrojofuego.PanelEntrenador();
-        panelPokemon1 = new com.daw.pokemonrojofuego.PanelPokemon();
+        panelPokemon2 = new com.daw.pokemonrojofuego.PanelPokemon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane1.addTab("Entrenador", panelEntrenador2);
-
-        javax.swing.GroupLayout panelPokemon1Layout = new javax.swing.GroupLayout(panelPokemon1);
-        panelPokemon1.setLayout(panelPokemon1Layout);
-        panelPokemon1Layout.setHorizontalGroup(
-            panelPokemon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
-        );
-        panelPokemon1Layout.setVerticalGroup(
-            panelPokemon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 683, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Pokemon", panelPokemon1);
+        jTabbedPaneVentanaPrincipal.addTab("Entrenador", panelEntrenador2);
+        jTabbedPaneVentanaPrincipal.addTab("Pokemon", panelPokemon2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPaneVentanaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPaneVentanaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -67,40 +71,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        // 1. Aplicamos el nuevo Look and Feel
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            com.formdev.flatlaf.FlatLightLaf.setup();
+            javax.swing.UIManager.put("Button.arc", 15); // Redondea los bordes de los botones
+            javax.swing.UIManager.put("Component.arc", 15); // Redondea cajas de texto y otros
+        } catch (Exception ex) {
+            System.err.println("Fallo al inicializar FlatLaf, se usará el tema por defecto");
         }
-        //</editor-fold>
 
-        /* Create and display the form */
+        // 2. Lanzamos la ventana
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                // Centramos y mostramos
+                VentanaPrincipal ventana = new VentanaPrincipal();
+                ventana.setLocationRelativeTo(null);
+                ventana.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPaneVentanaPrincipal;
     private com.daw.pokemonrojofuego.PanelEntrenador panelEntrenador2;
-    private com.daw.pokemonrojofuego.PanelPokemon panelPokemon1;
+    private com.daw.pokemonrojofuego.PanelPokemon panelPokemon2;
     // End of variables declaration//GEN-END:variables
 }

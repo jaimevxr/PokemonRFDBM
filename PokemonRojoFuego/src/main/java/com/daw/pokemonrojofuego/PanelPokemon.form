@@ -16,13 +16,366 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="497" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblPagina" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnAnterior" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnSiguiente" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="buscarPokemonLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtBuscador" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="infoLabel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="idEntrenadorLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txtIdEntrenador" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="nivelLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txtNivel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="especieLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txtEspecie" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="apodoLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txtApodo" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="idPokemonLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txtIdPokemon" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jButtonBuscar" pref="94" max="32767" attributes="0"/>
+                                  <Component id="btnBorrar" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnActualizar" max="32767" attributes="0"/>
+                                  <Component id="btnGuardar" min="-2" pref="94" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="btnLimpiar" max="32767" attributes="0"/>
+                          <Component id="btnActualizarMasivo" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="btnSeleccionarFoto" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFoto" min="-2" pref="288" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="buscarPokemonLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtBuscador" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="infoLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="idPokemonLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIdPokemon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="apodoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtApodo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="especieLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEspecie" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nivelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNivel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnActualizarMasivo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="idEntrenadorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIdEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="lblFoto" min="-2" pref="263" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" alignment="0" min="-2" pref="540" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnSeleccionarFoto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAnterior" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSiguiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblPagina" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tablaPokemon">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="6" rowCount="4">
+                <Column editable="true" title="Apodo" type="java.lang.Object"/>
+                <Column editable="false" title="ID" type="java.lang.Integer"/>
+                <Column editable="false" title="Especie" type="java.lang.Object"/>
+                <Column editable="true" title="Nivel" type="java.lang.Integer"/>
+                <Column editable="false" title="ID Entrenador" type="java.lang.Object"/>
+                <Column editable="false" title="Sprite" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaPokemonMouseClicked"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="buscarPokemonLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buscar Pokemon"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtBuscador">
+      <Properties>
+        <Property name="columns" type="int" value="20"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Escribe un ID, entrenador o especie..."/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtBuscadorFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtBuscadorFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscadorActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonBuscar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buscar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuscarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="infoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Informacion del Pokemon"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="idPokemonLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID Pokemon"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="apodoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Apodo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="especieLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Especie:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nivelLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nivel:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="idEntrenadorLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID Entrenador:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtIdPokemon">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtApodo">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEspecie">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNivel">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtIdEntrenador">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblFoto">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Previsualizacion del pokemon seleccionado"/>
+          </Border>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSeleccionarFoto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Seleccionar Foto"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeleccionarFotoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnGuardar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Guardar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnActualizar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Actualizar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBorrar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Borrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBorrarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLimpiar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnActualizarMasivo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Actualizar foto a toda la especie"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarMasivoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAnterior">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x2b05;&#xfe0f;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnteriorActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSiguiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x27a1;&#xfe0f;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSiguienteActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPagina">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pagina x de x"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

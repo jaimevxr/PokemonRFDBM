@@ -41,7 +41,7 @@ public class EntrenadorDAO {
     }
 
     public void guardar(Entrenador entrenador) {
-        EntityManager em = EntityManagerUtil.getEntityManager();
+        javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
         em.getTransaction().begin();
         em.persist(entrenador);
         em.getTransaction().commit();
@@ -49,11 +49,23 @@ public class EntrenadorDAO {
     }
 
     public void actualizar(Entrenador entrenador) {
-        EntityManager em = EntityManagerUtil.getEntityManager();
-        em.getTransaction().begin();
-        em.merge(entrenador);
-        em.getTransaction().commit();
-        em.close();
+        javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            // La magia pura de JPA para actualizar entidades modificadas
+            em.merge(entrenador);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            throw e;
+        } finally {
+            em.close();
+        }
     }
 
     public void borrar(int id) {
@@ -74,5 +86,4 @@ public class EntrenadorDAO {
         em.close();
         return lista;
     }
-
 }

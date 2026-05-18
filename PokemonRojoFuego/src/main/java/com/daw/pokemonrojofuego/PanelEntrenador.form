@@ -22,51 +22,48 @@
                   <Component id="jScrollPane1" alignment="1" min="-2" pref="467" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buscarEntrenadorLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtBuscador" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <Component id="infoEntrenadorLabel" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              <Component id="idEntrenadorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="nombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="claseLabel" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="dineroLabel" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtDinero" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtClase" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                                      <Component id="testButton" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Component id="txtId" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtId" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jButton3" pref="82" max="32767" attributes="0"/>
-                                                  <Component id="jButton4" alignment="0" pref="82" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jButton1" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="txtClase" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jButtonBorrar" pref="82" max="32767" attributes="0"/>
+                                      <Component id="jButtonBuscar" alignment="0" pref="82" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jButtonGuardar" max="32767" attributes="0"/>
+                                      <Component id="jButtonActualizar" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="jButtonLimpiarContenido" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="246" max="32767" attributes="0"/>
+              <EmptySpace pref="183" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,49 +72,52 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtBuscador" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="buscarEntrenadorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBuscador" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButton4" min="-2" pref="24" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jButtonBuscar" min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="infoEntrenadorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonGuardar" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtClase" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="testButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jButtonLimpiarContenido" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="idEntrenadorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="claseLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtClase" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="dineroLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDinero" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtDinero" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <EmptySpace pref="91" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="413" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -173,7 +173,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="buscarEntrenadorLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar entrenador :"/>
       </Properties>
@@ -186,7 +186,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Buscar ID o Nombre"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Text Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[80, 22]"/>
@@ -198,33 +198,36 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscadorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jButtonGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGuardarActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="jButtonActualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Actualizar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonActualizarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="jButtonBorrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Borrar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBorrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="infoEntrenadorLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Informacion del entrenador"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="jButtonBuscar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -235,25 +238,25 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuscarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="idEntrenadorLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="ID Entrenador:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="nombreLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="claseLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Clase:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
+    <Component class="javax.swing.JLabel" name="dineroLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dinero:"/>
       </Properties>
@@ -290,12 +293,12 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="testButton">
+    <Component class="javax.swing.JButton" name="jButtonLimpiarContenido">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cambiar foto pokemon"/>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="testButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLimpiarContenidoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

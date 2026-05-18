@@ -86,6 +86,18 @@ public class PokemonDAO {
         return lista;
     }
 
+    // NUEVO: Cuenta cuántos Pokémon tiene un Entrenador (Para la regla de max 6)
+    public long contarPokemonDeEntrenador(int idEntrenador) {
+        EntityManager em = EntityManagerUtil.getEntityManager();
+        Long cantidad = (Long) em.createQuery(
+                "SELECT COUNT(p) FROM Pokemon p WHERE p.entrenador.idEntrenador = :id"
+        )
+                .setParameter("id", idEntrenador)
+                .getSingleResult();
+        em.close();
+        return cantidad;
+    }
+
     public void actualizarSpriteMasivo(String nombrePokemon, byte[] nuevoSprite) {
         javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
         try {
@@ -111,6 +123,33 @@ public class PokemonDAO {
             }
             e.printStackTrace();
         }
+    }
+
+    // Devuelve una lista de Pokémon limitada para la paginación
+    public List<Pokemon> obtenerPaginados(int inicio, int cantidad) {
+        EntityManager em = EntityManagerUtil.getEntityManager();
+
+        // Usamos una consulta nativa para que SQLite no se queje de los cursores
+        // LIMIT es la cantidad de registros, OFFSET es desde dónde empieza
+        javax.persistence.Query consulta = em.createNativeQuery(
+                "SELECT * FROM Pokemon LIMIT ?1 OFFSET ?2",
+                Pokemon.class
+        );
+
+        consulta.setParameter(1, cantidad);
+        consulta.setParameter(2, inicio);
+
+        List<Pokemon> lista = consulta.getResultList();
+        em.close();
+        return lista;
+    }
+
+    // Necesitamos saber el total para saber cuándo parar de pasar páginas
+    public long contarTotalPokemon() {
+        EntityManager em = EntityManagerUtil.getEntityManager();
+        Long total = (Long) em.createQuery("SELECT COUNT(p) FROM Pokemon p").getSingleResult();
+        em.close();
+        return total;
     }
 
 }
