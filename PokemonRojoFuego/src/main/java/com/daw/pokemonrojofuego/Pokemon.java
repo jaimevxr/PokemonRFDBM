@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Alumnado
+ * @author Kuroiryuudev
  */
 @Entity
 @Table(name = "Pokemon")
@@ -54,9 +54,6 @@ public class Pokemon implements Serializable {
     @Column(name = "sprite")
     private byte[] sprite;
 
-    // comentado para no eliminarlo, lo sustituye el joinColumn
-    //  @Column(name = "id_entrenador")
-    //private Integer idEntrenador;
     public Pokemon() {
     }
 

@@ -20,7 +20,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Alumnado
+ * @author Kuroiryuudev
  */
 @Entity
 @Table(name = "Entrenador")

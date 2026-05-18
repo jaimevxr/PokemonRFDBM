@@ -6,7 +6,7 @@ package com.daw.pokemonrojofuego;
 
 /**
  *
- * @author Alumnado
+ * @author Kuroiryuudev
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -17,11 +17,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Pokémon Rojo Fuego - Gestor de Entrenadores");
         try {
-            // Opción A: Si la foto está en la raíz de resources
+            //Si la foto está en la raíz de resources
             java.net.URL urlIcono = getClass().getResource("/icon.png");
-
-            // Opción B: Si la foto está dentro de tus paquetes (ajusta la ruta)
-            // java.net.URL urlIcono = getClass().getResource("/com/daw/pokemonrojofuego/icon.png");
+            // aplicamos el icono
             if (urlIcono != null) {
                 java.awt.Image icon = javax.imageio.ImageIO.read(urlIcono);
                 this.setIconImage(icon);
@@ -71,19 +69,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        // 1. Aplicamos el nuevo Look and Feel
         try {
+            // aplica el look and feel de flatlaf
             com.formdev.flatlaf.FlatLightLaf.setup();
-            javax.swing.UIManager.put("Button.arc", 15); // Redondea los bordes de los botones
-            javax.swing.UIManager.put("Component.arc", 15); // Redondea cajas de texto y otros
+             // Redondea los bordes de los botones
+            javax.swing.UIManager.put("Button.arc", 15);
+            // Redondea cajas de texto y otros
+            javax.swing.UIManager.put("Component.arc", 15);
         } catch (Exception ex) {
             System.err.println("Fallo al inicializar FlatLaf, se usará el tema por defecto");
         }
 
-        // 2. Lanzamos la ventana
+        // Lanzamos la ventana
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                // Centramos y mostramos
                 VentanaPrincipal ventana = new VentanaPrincipal();
                 ventana.setLocationRelativeTo(null);
                 ventana.setVisible(true);

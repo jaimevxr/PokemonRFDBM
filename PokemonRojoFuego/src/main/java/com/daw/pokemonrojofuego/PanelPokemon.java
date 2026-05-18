@@ -6,12 +6,11 @@ package com.daw.pokemonrojofuego;
 
 /**
  *
- * @author Alumnado
+ * @author Kuroiryuudev
  */
 public class PanelPokemon extends javax.swing.JPanel {
 
-    // Variable para recordar la foto del Pokémon seleccionado
-    private byte[] spriteTemporal = null;
+    private byte[] spriteTemporal = null;  // Variable para recordar la foto del Pokémon seleccionado
     private int filaInicio = 0; // Controla desde qué registro empezamos a mostrar
     private final int TAMANO_PAGINA = 8; // De cuánto en cuánto pasamos
 
@@ -21,15 +20,15 @@ public class PanelPokemon extends javax.swing.JPanel {
     public PanelPokemon() {
         initComponents();
 
-        // Magia anti-crasheos de NetBeans: 
-        // Solo ejecuta la base de datos si NO estamos en modo diseño
+        // Solo ejecuta la base de datos si NO estamos en modo diseño, sino directamente no dejara configurar desde el jFrame
         if (!java.beans.Beans.isDesignTime()) {
             PokemonDAO dao = new PokemonDAO();
             cargarTablaPokemon(dao.obtenerTodos());
         }
+
+        // Sistema de paginado para la tabla
         if (!java.beans.Beans.isDesignTime()) {
             PokemonDAO dao = new PokemonDAO();
-            // Cambiamos obtenerTodos() por el paginado
             cargarTablaPokemon(dao.obtenerPaginados(filaInicio, TAMANO_PAGINA));
             actualizarInfoPagina();
         }
@@ -38,13 +37,13 @@ public class PanelPokemon extends javax.swing.JPanel {
     // Este método recibe una lista de Pokémon y los pinta en la tabla
     public void cargarTablaPokemon(java.util.List<Pokemon> lista) {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaPokemon.getModel();
-        modelo.setRowCount(0); // Vaciamos la tabla antes de rellenar
+        modelo.setRowCount(0);
 
         for (Pokemon p : lista) {
-            Object[] fila = new Object[6]; // 6 columnas
+            Object[] fila = new Object[6];
             fila[0] = p.getApodo();
-            fila[1] = p.getIdPokemon(); // O el nombre que tenga tu getter de ID
-            fila[2] = p.getEspecie(); // ¡Asegúrate de tener getEspecie() en tu clase!
+            fila[1] = p.getIdPokemon();
+            fila[2] = p.getEspecie();
             fila[3] = p.getNivel();
 
             // Si tiene entrenador, sacamos su ID. Si no, ponemos un aviso.
@@ -54,7 +53,7 @@ public class PanelPokemon extends javax.swing.JPanel {
                 fila[4] = "Libre";
             }
 
-            // Tratamiento del Sprite (Columna 5)
+            // Tratamiento del Sprite
             byte[] spriteBytes = p.getSprite();
             if (spriteBytes != null && spriteBytes.length > 0) {
                 try {
@@ -68,17 +67,16 @@ public class PanelPokemon extends javax.swing.JPanel {
                 fila[5] = "Sin foto";
             }
             modelo.addRow(fila);
-            // Creamos un renderizador que centra el texto
-            javax.swing.table.DefaultTableCellRenderer centrado = new javax.swing.table.DefaultTableCellRenderer();
-            centrado.setHorizontalAlignment(javax.swing.JLabel.LEFT);
+            // Creamos un renderizador que alinea el texto a la izquierda
+            javax.swing.table.DefaultTableCellRenderer alineadoIzq = new javax.swing.table.DefaultTableCellRenderer();
+            alineadoIzq.setHorizontalAlignment(javax.swing.JLabel.LEFT);
 
-            // Aplicamos el centrado a las columnas de ID (1), Nivel (3) e ID Entrenador (4)
-            tablaPokemon.getColumnModel().getColumn(1).setCellRenderer(centrado);
-            tablaPokemon.getColumnModel().getColumn(3).setCellRenderer(centrado);
-            tablaPokemon.getColumnModel().getColumn(4).setCellRenderer(centrado);
+            tablaPokemon.getColumnModel().getColumn(1).setCellRenderer(alineadoIzq);
+            tablaPokemon.getColumnModel().getColumn(3).setCellRenderer(alineadoIzq);
+            tablaPokemon.getColumnModel().getColumn(4).setCellRenderer(alineadoIzq);
         }
 
-        // Configuramos la altura y el renderizador de la imagen para la columna 5 (Sprite)
+        // Configuramos la altura y el renderizador de la imagen para el sprite columna 5
         tablaPokemon.setRowHeight(64);
         tablaPokemon.getColumnModel().getColumn(5).setCellRenderer(new javax.swing.table.DefaultTableCellRenderer() {
             @Override
@@ -164,7 +162,7 @@ public class PanelPokemon extends javax.swing.JPanel {
                 java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -404,49 +402,44 @@ public class PanelPokemon extends javax.swing.JPanel {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
-        // 1. Recogemos lo que ha escrito el usuario y lo pasamos a minúsculas
+        // Recogemos lo que ha escrito el usuario y lo pasamos a minúsculas
         String busqueda = txtBuscador.getText().trim().toLowerCase();
         PokemonDAO dao = new PokemonDAO();
 
-        // 2. Si le da a buscar con la caja vacía (o con el texto gris por defecto), cargamos TODOS
-        // 2. Si le da a buscar con la caja vacía o con el texto por defecto, cargamos TODOS
+        // Si le da a buscar con la caja vacía o con el texto por defecto, cargamos TODOS
         if (busqueda.isEmpty() || busqueda.equals("escribe un id, entrenador o especie...")) {
             cargarTablaPokemon(dao.obtenerTodos());
             return;
         }
 
-        // 3. Traemos a todos los Pokémon de la base de datos
+        // Traemos a todos los Pokémon de la base de datos
         java.util.List<Pokemon> todos = dao.obtenerTodos();
 
-        // 4. Creamos una lista vacía para guardar solo los que coincidan
+        // Creamos una lista vacía para guardar solo los que coincidan y asi no saturamos la base de datos
         java.util.List<Pokemon> filtrados = new java.util.ArrayList<>();
 
-        // 5. El Filtro Universal: Revisamos Pokémon por Pokémon
+        // Revisamos Pokémon por Pokémon
         for (Pokemon p : todos) {
             boolean coincide = false;
 
-            // ¿Coincide el ID del Pokémon?
             if (String.valueOf(p.getIdPokemon()).equals(busqueda)) {
                 coincide = true;
             }
 
-            // ¿Coincide el Apodo? (Comprobamos que no sea null por seguridad)
             if (p.getApodo() != null && p.getApodo().toLowerCase().contains(busqueda)) {
                 coincide = true;
             }
 
-            // ¿Coincide la Especie?
             if (p.getEspecie() != null && p.getEspecie().toLowerCase().contains(busqueda)) {
                 coincide = true;
             }
 
-            // Si tiene entrenador, comprobamos también los datos del entrenador
             if (p.getEntrenador() != null) {
-                // ¿Coincide el ID del Entrenador?
+
                 if (String.valueOf(p.getEntrenador().getIdEntrenador()).equals(busqueda)) {
                     coincide = true;
                 }
-                // ¿Coincide el Nombre del Entrenador?
+
                 if (p.getEntrenador().getNombreEntrenador().toLowerCase().contains(busqueda)) {
                     coincide = true;
                 }
@@ -458,7 +451,7 @@ public class PanelPokemon extends javax.swing.JPanel {
             }
         }
 
-        // 6. Finalmente, le pasamos nuestra lista filtrada al "Pintor de tablas"
+        // le pasamos nuestra lista filtrada al "Pintor de tablas"
         cargarTablaPokemon(filtrados);
 
         // Aviso si no encontró nada
@@ -485,23 +478,22 @@ public class PanelPokemon extends javax.swing.JPanel {
 
     private void tablaPokemonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPokemonMouseClicked
         // TODO add your handling code here:
-        // 1. Averiguamos en qué fila de la tabla ha hecho clic el usuario
+        // Averiguamos en qué fila de la tabla ha hecho clic el usuario
         int fila = tablaPokemon.getSelectedRow();
 
-        if (fila != -1) { // Si realmente ha tocado una fila válida
+        if (fila != -1) {
 
-            // 2. Pasamos los datos de la tabla a las cajitas de texto de la derecha
-            // OJO: El orden de los números (0, 1, 2...) depende de cómo pusiste las columnas en tu tabla
+            // Pasamos los datos de la tabla a los text field
             txtApodo.setText(tablaPokemon.getValueAt(fila, 0) != null ? tablaPokemon.getValueAt(fila, 0).toString() : "");
             txtIdPokemon.setText(tablaPokemon.getValueAt(fila, 1).toString());
             txtEspecie.setText(tablaPokemon.getValueAt(fila, 2) != null ? tablaPokemon.getValueAt(fila, 2).toString() : "");
             txtNivel.setText(tablaPokemon.getValueAt(fila, 3) != null ? tablaPokemon.getValueAt(fila, 3).toString() : "");
 
-            // Si el entrenador está libre, dejamos la caja vacía para que no ponga "Libre" literalmente
+            // Si el entrenador está libre, dejamos la caja vacía para que no ponga "Libre"
             String idEntrenador = tablaPokemon.getValueAt(fila, 4).toString();
             txtIdEntrenador.setText(idEntrenador.equals("Libre") ? "" : idEntrenador);
 
-// 3. ¡Magia con la foto corregida para que no se salga del borde!
+            // foto corregida para que no se salga del borde
             try {
                 int id = Integer.parseInt(txtIdPokemon.getText());
                 PokemonDAO dao = new PokemonDAO();
@@ -511,24 +503,22 @@ public class PanelPokemon extends javax.swing.JPanel {
                     spriteTemporal = p.getSprite();
                     javax.swing.ImageIcon icono = new javax.swing.ImageIcon(spriteTemporal);
 
-                    // --- AQUÍ ESTÁ LA CORRECCIÓN ---
-                    // 1. Obtenemos el grosor del borde (los Insets)
+                    // Obtenemos el grosor del borde (los Insets)
                     java.awt.Insets insets = lblFoto.getInsets();
 
-                    // 2. Calculamos el espacio ÚTIL real que queda dentro del borde
+                    // Calculamos el espacio ÚTIL real que queda dentro del borde
                     int anchoUtil = lblFoto.getWidth() - insets.left - insets.right;
                     int altoUtil = lblFoto.getHeight() - insets.top - insets.bottom;
 
-                    // 3. Pequeña seguridad: si el label es muy pequeño, evitar errores
+                    // si el label es muy pequeño, evitar errores
                     if (anchoUtil > 0 && altoUtil > 0) {
-                        // 4. Escalamos la imagen usando el espacio ÚTIL
+                        // Escalamos la imagen usando el espacio ÚTIL
                         java.awt.Image img = icono.getImage().getScaledInstance(anchoUtil, altoUtil, java.awt.Image.SCALE_SMOOTH);
                         lblFoto.setIcon(new javax.swing.ImageIcon(img));
                     } else {
                         // Si no cabe, no ponemos nada para no romper el diseño
                         lblFoto.setIcon(null);
                     }
-                    // ------------------------------
 
                 } else {
                     spriteTemporal = null;
@@ -565,7 +555,7 @@ public class PanelPokemon extends javax.swing.JPanel {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         try {
-            // 1. Validaciones iniciales de campos vacíos
+            // Validaciones iniciales de campos vacíos
             if (txtIdEntrenador.getText().trim().isEmpty() || txtNivel.getText().trim().isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this, "ID Entrenador y Nivel son campos obligatorios.");
                 return;
@@ -575,26 +565,26 @@ public class PanelPokemon extends javax.swing.JPanel {
             int nivel = Integer.parseInt(txtNivel.getText().trim());
             PokemonDAO pokeDao = new PokemonDAO();
 
-            // 2. REGLA: Máximo 6 Pokémon por equipo
+            // Máximo 6 Pokémon por equipo
             if (pokeDao.contarPokemonDeEntrenador(idEntrenador) >= 6) {
                 javax.swing.JOptionPane.showMessageDialog(this, "¡Equipo lleno! Este entrenador ya tiene 6 Pokémon.");
                 return;
             }
 
-            // 3. VALIDACIÓN: Nivel entre 1 y 100
+            // Nivel entre 1 y 100
             if (nivel < 1 || nivel > 100) {
                 javax.swing.JOptionPane.showMessageDialog(this, "El nivel debe estar entre 1 y 100.");
                 return;
             }
 
-            // 4. Proceso de guardado
+            // Proceso de guardado
             Entrenador dueyo = new EntrenadorDAO().buscarPorId(idEntrenador);
             if (dueyo != null) {
                 Pokemon nuevo = new Pokemon();
                 nuevo.setApodo(txtApodo.getText().trim());
                 nuevo.setEspecie(txtEspecie.getText().trim().toLowerCase());
                 nuevo.setNivel(nivel);
-                nuevo.setSprite(spriteTemporal); // La foto cargada en la previsualización
+                nuevo.setSprite(spriteTemporal);
                 nuevo.setEntrenador(dueyo);
 
                 pokeDao.guardar(nuevo);
@@ -602,7 +592,6 @@ public class PanelPokemon extends javax.swing.JPanel {
 
                 // Refrescar interfaz
                 btnLimpiar.doClick();
-                //cargarTablaPokemon(pokeDao.obtenerTodos());
                 refrescarPaginaActual();
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "No existe ningún entrenador con ID: " + idEntrenador);
@@ -626,7 +615,7 @@ public class PanelPokemon extends javax.swing.JPanel {
             int id = Integer.parseInt(txtIdPokemon.getText());
             int nivel = Integer.parseInt(txtNivel.getText().trim());
 
-            // VALIDACIÓN: Nivel entre 1 y 100
+            // Nivel entre 1 y 100
             if (nivel < 1 || nivel > 100) {
                 javax.swing.JOptionPane.showMessageDialog(this, "El nivel debe estar entre 1 y 100.");
                 return;
@@ -639,7 +628,7 @@ public class PanelPokemon extends javax.swing.JPanel {
                 p.setApodo(txtApodo.getText().trim());
                 p.setEspecie(txtEspecie.getText().trim().toLowerCase());
                 p.setNivel(nivel);
-                p.setSprite(spriteTemporal); // Se actualiza con lo que haya en la previsualización
+                p.setSprite(spriteTemporal);
 
                 // Actualizar dueño
                 int idEntrenador = Integer.parseInt(txtIdEntrenador.getText().trim());
@@ -648,7 +637,6 @@ public class PanelPokemon extends javax.swing.JPanel {
                 dao.actualizar(p);
                 javax.swing.JOptionPane.showMessageDialog(this, "¡Pokémon actualizado correctamente!");
                 refrescarPaginaActual();
-                //cargarTablaPokemon(dao.obtenerTodos());
             }
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error: Revisa que los campos numéricos sean correctos.");
@@ -670,33 +658,31 @@ public class PanelPokemon extends javax.swing.JPanel {
         if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
             new PokemonDAO().borrar(Integer.parseInt(txtIdPokemon.getText()));
             btnLimpiar.doClick();
-            // cargarTablaPokemon(new PokemonDAO().obtenerTodos());
             refrescarPaginaActual();
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-// 1. Vaciamos todos los campos de texto
+        // Vaciamos todos los campos de texto
         txtIdPokemon.setText("");
         txtApodo.setText("");
         txtEspecie.setText("");
         txtNivel.setText("");
         txtIdEntrenador.setText("");
 
-        // 2. Vaciamos el buscador y le devolvemos su texto por defecto (el placeholder)
+        // Vaciamos el buscador y le devolvemos su texto por defecto
         txtBuscador.setText("Escribe un ID, entrenador o especie...");
         txtBuscador.setForeground(new java.awt.Color(153, 153, 153)); // Volvemos al gris
 
-        // 3. Quitamos la foto de la previsualización y reseteamos la variable temporal
+        // Quitamos la foto de la previsualización y reseteamos la variable temporal
         lblFoto.setIcon(null);
         spriteTemporal = null;
 
-        // 4. REINICIAR LA TABLA: Llamamos al DAO para traer a todos de nuevo
+        // Llamamos al DAO para traer a todos de nuevo
         try {
             PokemonDAO dao = new PokemonDAO();
-            filaInicio = 0; // Volvemos al principio
+            filaInicio = 0;
             refrescarPaginaActual();
-            //cargarTablaPokemon(dao.obtenerTodos());
         } catch (Exception e) {
             System.out.println("Error al reiniciar la tabla: " + e.getMessage());
         }
@@ -704,7 +690,7 @@ public class PanelPokemon extends javax.swing.JPanel {
 
     private void btnActualizarMasivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarMasivoActionPerformed
         // TODO add your handling code here:
-        // 1. Verificamos que el usuario haya seleccionado una foto primero
+        // Verificamos que el usuario haya seleccionado una foto primero
         if (spriteTemporal == null) {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Primero debes cargar una imagen con el botón 'Seleccionar Foto'.",
@@ -712,17 +698,16 @@ public class PanelPokemon extends javax.swing.JPanel {
             return;
         }
 
-        // 2. Pedimos al usuario la especie que quiere actualizar (ej: "pikachu")
+        // Pedimos al usuario la especie que quiere actualizar
         String especieACambiar = javax.swing.JOptionPane.showInputDialog(this,
                 "¿A qué ESPECIE quieres aplicarle esta foto de forma masiva?\n(Ejemplo: pikachu, charizard...)");
 
-        // 3. Si el usuario no canceló y escribió algo...
+        // Si el usuario no canceló y escribió algo
         if (especieACambiar != null && !especieACambiar.trim().isEmpty()) {
 
-            // Limpiamos el texto por si puso espacios o mayúsculas
             String especieLimpia = especieACambiar.trim().toLowerCase();
 
-            // 4. Pedimos confirmación final
+            // Pedimos confirmación final
             int respuesta = javax.swing.JOptionPane.showConfirmDialog(this,
                     "¿Estás seguro de que quieres cambiar la foto de TODOS los " + especieLimpia + "?\nEsta acción no se puede deshacer.",
                     "Confirmar actualización masiva",
@@ -731,13 +716,12 @@ public class PanelPokemon extends javax.swing.JPanel {
 
             if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
                 try {
-                    // 5. Ejecutamos la magia a través del DAO
                     PokemonDAO dao = new PokemonDAO();
                     dao.actualizarSpriteMasivo(especieLimpia, spriteTemporal);
 
                     javax.swing.JOptionPane.showMessageDialog(this, "¡Sprites actualizados con éxito!");
 
-                    // 6. Recargamos la tabla para que se vean los nuevos sprites de golpe
+                    // Recargamos la tabla para que se vean los nuevos sprites de golpe
                     cargarTablaPokemon(dao.obtenerTodos());
 
                 } catch (Exception ex) {

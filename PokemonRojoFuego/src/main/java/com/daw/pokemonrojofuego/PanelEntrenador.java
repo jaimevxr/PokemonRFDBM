@@ -6,7 +6,7 @@ package com.daw.pokemonrojofuego;
  */
 /**
  *
- * @author Alumnado
+ * @author Kuroiryuudev
  */
 public class PanelEntrenador extends javax.swing.JPanel {
 

@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author Alumnado
+ * @author Kuroiryuudev
  */
 public class EntityManagerUtil {
 

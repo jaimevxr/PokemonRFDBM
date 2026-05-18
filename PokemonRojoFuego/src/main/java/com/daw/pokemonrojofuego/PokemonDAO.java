@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Alumnado
+ * @author Kuroiryuudev
  */
 public class PokemonDAO {
 
@@ -86,7 +86,7 @@ public class PokemonDAO {
         return lista;
     }
 
-    // NUEVO: Cuenta cuántos Pokémon tiene un Entrenador (Para la regla de max 6)
+    // Cuenta cuántos Pokémon tiene un Entrenador Para la regla de max 6
     public long contarPokemonDeEntrenador(int idEntrenador) {
         EntityManager em = EntityManagerUtil.getEntityManager();
         Long cantidad = (Long) em.createQuery(
@@ -97,21 +97,18 @@ public class PokemonDAO {
         em.close();
         return cantidad;
     }
-
+    // actualiza las fotos de toda la especie
     public void actualizarSpriteMasivo(String nombrePokemon, byte[] nuevoSprite) {
         javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
         try {
             em.getTransaction().begin();
-
-            // OJO: Si tu variable en Pokemon.java se llama 'apodo', déjalo así. 
-            // Si se llama 'especie' o 'nombre', cámbialo en "p.apodo".
             javax.persistence.Query consulta = em.createQuery(
-                    "UPDATE Pokemon p SET p.sprite = :foto WHERE p.apodo = :nombre"
+                    "UPDATE Pokemon p SET p.sprite = :foto WHERE p.especie = :nombre"
             );
             consulta.setParameter("foto", nuevoSprite);
             consulta.setParameter("nombre", nombrePokemon);
 
-            int actualizados = consulta.executeUpdate(); // Ejecuta el rayo
+            int actualizados = consulta.executeUpdate();
 
             em.getTransaction().commit();
 
@@ -128,9 +125,6 @@ public class PokemonDAO {
     // Devuelve una lista de Pokémon limitada para la paginación
     public List<Pokemon> obtenerPaginados(int inicio, int cantidad) {
         EntityManager em = EntityManagerUtil.getEntityManager();
-
-        // Usamos una consulta nativa para que SQLite no se queje de los cursores
-        // LIMIT es la cantidad de registros, OFFSET es desde dónde empieza
         javax.persistence.Query consulta = em.createNativeQuery(
                 "SELECT * FROM Pokemon LIMIT ?1 OFFSET ?2",
                 Pokemon.class
@@ -144,7 +138,7 @@ public class PokemonDAO {
         return lista;
     }
 
-    // Necesitamos saber el total para saber cuándo parar de pasar páginas
+    // total para saber cuándo parar de pasar páginas
     public long contarTotalPokemon() {
         EntityManager em = EntityManagerUtil.getEntityManager();
         Long total = (Long) em.createQuery("SELECT COUNT(p) FROM Pokemon p").getSingleResult();

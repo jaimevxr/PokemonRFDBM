@@ -8,10 +8,10 @@ import org.eclipse.persistence.queries.ValueReadQuery;
 
 /**
  *
- * @author Jbelc
+ * @author Kuroiryuudev
  */
 
-
+// esta clase fue creada para adaptar el autoincrement de sqlite a eclipselink
 public class SQLitePlatform extends DatabasePlatform {
 
     @Override

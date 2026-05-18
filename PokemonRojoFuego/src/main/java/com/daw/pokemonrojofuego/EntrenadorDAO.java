@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
  */
 /**
  *
- * @author Alumnado
+ * @author Kuroiryuudev
  */
 public class EntrenadorDAO {
 
@@ -24,7 +24,7 @@ public class EntrenadorDAO {
 
         return entrenador;
     }
-
+    // Metodo select, encontrar entrenador de la base de datos por su nombre
     public Entrenador buscarPorNombre(String nombreAbuscar) {
         javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
         try {
@@ -39,7 +39,7 @@ public class EntrenadorDAO {
             return null;
         }
     }
-
+    // metodo insert
     public void guardar(Entrenador entrenador) {
         javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
         em.getTransaction().begin();
@@ -47,13 +47,11 @@ public class EntrenadorDAO {
         em.getTransaction().commit();
         em.close();
     }
-
+    // metodo update
     public void actualizar(Entrenador entrenador) {
         javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
         try {
             em.getTransaction().begin();
-
-            // La magia pura de JPA para actualizar entidades modificadas
             em.merge(entrenador);
 
             em.getTransaction().commit();
@@ -67,7 +65,7 @@ public class EntrenadorDAO {
             em.close();
         }
     }
-
+    // metodo delete
     public void borrar(int id) {
         EntityManager em = EntityManagerUtil.getEntityManager();
         em.getTransaction().begin();
@@ -78,7 +76,7 @@ public class EntrenadorDAO {
         em.getTransaction().commit();
         em.close();
     }
-
+    // metodo para obtener todos los pokemons
     public List<Entrenador> obtenerTodos() {
         EntityManager em = EntityManagerUtil.getEntityManager();
         javax.persistence.TypedQuery<Entrenador> consulta = em.createQuery("SELECT e FROM Entrenador e", Entrenador.class);
