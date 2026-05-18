@@ -41,4 +41,4 @@ La aplicación utiliza la librería **FlatLaf** para ofrecer una estética limpi
 
 1. Clonar el repositorio:
    ```bash
-   git clone [https://github.com/tu-usuario/PokemonRF.git](https://github.com/tu-usuario/PokemonRF.git)
+   git clone [https://github.com/KuroiRyuuDev/PokemonRFDBM.git]
