@@ -17,7 +17,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Pokémon Rojo Fuego - Gestor de Entrenadores");
         try {
-            //Si la foto está en la raíz de resources
             java.net.URL urlIcono = getClass().getResource("/icon.png");
             // aplicamos el icono
             if (urlIcono != null) {
