@@ -371,12 +371,44 @@ public class PanelEntrenador extends javax.swing.JPanel {
             // Intentamos buscar por ID (si es número)
             int idBuscado = Integer.parseInt(textoBuscador);
             entrenadorEncontrado = dao.buscarPorId(idBuscado);
+
         } catch (NumberFormatException ex) {
-            // Si no es número, buscamos por Nombre
-            entrenadorEncontrado = dao.buscarPorNombre(textoBuscador);
+            // Si no es número, buscamos por Nombre (SI HAY MAS ENTRENADORES CON EL MISMO NOMBRE DEVUELVE UNA LISTA)
+            java.util.List<Entrenador> resultados = dao.buscarPorNombre(textoBuscador);
+
+            if (resultados.isEmpty()) {
+                entrenadorEncontrado = null;
+
+            } else if (resultados.size() == 1) {
+                entrenadorEncontrado = resultados.get(0); // Solo hay uno
+
+            } else {
+                // Hay varios entrenadores con ese nombre
+                StringBuilder mensaje = new StringBuilder();
+                mensaje.append("Se han encontrado varios entrenadores llamados '").append(textoBuscador).append("'.\n");
+                mensaje.append("Por favor, búscalo por ID para ser exacto.\n\n");
+                mensaje.append("IDs disponibles:\n");
+
+                for (Entrenador e : resultados) {
+                    mensaje.append(" - ID: ").append(e.getIdEntrenador())
+                            .append(" (Clase: ").append(e.getClase()).append(")\n");
+                }
+
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        mensaje.toString(),
+                        "Múltiples resultados",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+                // Vaciamos los campos por precaución y cortamos la ejecución
+                txtId.setText("");
+                txtNombre.setText("");
+                txtClase.setText("");
+                txtDinero.setText("");
+                return;
+            }
         }
 
-        // Si encontramos al entrenador, rellenamos todo
+        // Si encontramos al entrenador (por ID o porque solo había 1 por nombre), rellenamos todo
         if (entrenadorEncontrado != null) {
             txtId.setText(String.valueOf(entrenadorEncontrado.getIdEntrenador()));
             txtNombre.setText(entrenadorEncontrado.getNombreEntrenador());
@@ -413,6 +445,7 @@ public class PanelEntrenador extends javax.swing.JPanel {
                 }
             }
         } else {
+            // Este else ahora solo salta si buscarPorId devuelve null o si buscarPorNombre devuelve lista vacía
             javax.swing.JOptionPane.showMessageDialog(this, "Entrenador no encontrado.");
             // Vaciamos campos
             txtId.setText("");

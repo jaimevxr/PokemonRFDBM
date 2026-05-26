@@ -24,21 +24,22 @@ public class EntrenadorDAO {
 
         return entrenador;
     }
-    // Metodo select, encontrar entrenador de la base de datos por su nombre
-    public Entrenador buscarPorNombre(String nombreAbuscar) {
+    // Metodo select, encontrar entrenadores de la base de datos por su nombre
+    public java.util.List<Entrenador> buscarPorNombre(String nombreAbuscar) {
         javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
         try {
-            // ¡Usamos el nombre exacto de la variable Java!
             javax.persistence.TypedQuery<Entrenador> consulta = em.createQuery(
                     "SELECT e FROM Entrenador e WHERE LOWER(e.nombreEntrenador) = LOWER(:nombre)", Entrenador.class);
             consulta.setParameter("nombre", nombreAbuscar);
 
-            return consulta.getSingleResult();
+            // Devolvemos la lista entera. Si no hay ninguno, devolverá una lista vacía.
+            return consulta.getResultList();
 
-        } catch (javax.persistence.NoResultException e) {
-            return null;
+        } finally {
+            em.close();
         }
     }
+
     // metodo insert
     public void guardar(Entrenador entrenador) {
         javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
@@ -47,6 +48,7 @@ public class EntrenadorDAO {
         em.getTransaction().commit();
         em.close();
     }
+
     // metodo update
     public void actualizar(Entrenador entrenador) {
         javax.persistence.EntityManager em = com.daw.pokemonrojofuego.EntityManagerUtil.getEntityManager();
@@ -65,17 +67,35 @@ public class EntrenadorDAO {
             em.close();
         }
     }
-    // metodo delete
+
+// metodo delete
     public void borrar(int id) {
         EntityManager em = EntityManagerUtil.getEntityManager();
-        em.getTransaction().begin();
-        Entrenador entrenador = em.find(Entrenador.class, id);
-        if (entrenador != null) {
-            em.remove(entrenador);
+        try {
+            em.getTransaction().begin();
+            Entrenador entrenador = em.find(Entrenador.class, id);
+
+            if (entrenador != null) {
+                // 1. Eliminamos primero todos sus Pokémon para que no queden huérfanos en la BD
+                em.createQuery("DELETE FROM Pokemon p WHERE p.entrenador.idEntrenador = :id")
+                        .setParameter("id", id)
+                        .executeUpdate();
+
+                // 2. Una vez limpia la relación, eliminamos al entrenador de forma segura
+                em.remove(entrenador);
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback(); // Si algo falla, revertimos los cambios
+            }
+            ex.printStackTrace();
+        } finally {
+            em.close();
         }
-        em.getTransaction().commit();
-        em.close();
     }
+
     // metodo para obtener todos los pokemons
     public List<Entrenador> obtenerTodos() {
         EntityManager em = EntityManagerUtil.getEntityManager();
