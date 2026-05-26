@@ -401,7 +401,7 @@ public class PanelPokemon extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:         
         // Recogemos lo que ha escrito el usuario y lo pasamos a minúsculas
         String busqueda = txtBuscador.getText().trim().toLowerCase();
         PokemonDAO dao = new PokemonDAO();
@@ -410,6 +410,26 @@ public class PanelPokemon extends javax.swing.JPanel {
         if (busqueda.isEmpty() || busqueda.equals("escribe un id, entrenador o especie...")) {
             cargarTablaPokemon(dao.obtenerTodos());
             return;
+        }
+
+        // COMPROBACIÓN DE ENTRENADORES DUPLICADOS ---
+        EntrenadorDAO daoEntrenador = new EntrenadorDAO();
+        java.util.List<Entrenador> entrenadoresCoincidentes = daoEntrenador.buscarPorNombre(busqueda);
+
+        if (entrenadoresCoincidentes.size() > 1) {
+            // Hay varios entrenadores con ese nombre, detenemos la búsqueda
+            StringBuilder mensaje = new StringBuilder();
+            mensaje.append("Hay varios entrenadores llamados '").append(busqueda).append("'.\n");
+            mensaje.append("Sus equipos Pokémon se mezclarían en la tabla.\n");
+            mensaje.append("Por favor, busca directamente por su 'ID Entrenador':\n\n");
+
+            for (Entrenador e : entrenadoresCoincidentes) {
+                mensaje.append(" - ID Entrenador: ").append(e.getIdEntrenador())
+                        .append(" (Clase: ").append(e.getClase()).append(")\n");
+            }
+
+            javax.swing.JOptionPane.showMessageDialog(this, mensaje.toString(), "Aviso de colisión", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; // Cortamos la ejecución aquí para que no mezcle los equipos
         }
 
         // Traemos a todos los Pokémon de la base de datos
